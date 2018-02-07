@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+layout:decorator="layout">
+
+<body>
+<section layout:fragment="content">
+<table>
+	<tr th:each="tag: ${list}">
+		<td th:text="${tag.name}"></td>
+		<td th:if="${tag.active}" th:text="'TAK'"/>
+		<td th:if="${tag.active==false}" th:text="'NIE'"/>
+		<td>
+		<a th:href="@{/tag/{id}/show(id=${tag.id})}">show</a>
+		<a th:href="@{/tag/{id}/change(id=${tag.id})}">change</a>
+		<a th:href="@{/tag/{id}/posts(id=${tag.id})}">posts</a>
+		</td>
+	</tr>
+</table>
+</section>
+</body>
+</html>

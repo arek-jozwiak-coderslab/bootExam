@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+layout:decorator="layout">
+
+<body>
+<section layout:fragment="content">
+    <form th:action="@{/post/add}" th:object="${post}" method="post">
+        <p>Title: <input type="text" th:field="*{title}" /></p>
+        <p>Description: <input type="text" th:field="*{description}" /></p>
+        <p>Content: <input type="text" th:field="*{content}" /></p>
+        <select th:field="*{user}">
+		<option th:each="el : ${allUsers}" th:value="${el.id}" th:text="${el.username}"/>
+		</select>	
+        <select th:field="*{tags}" multiple="multiple">
+		<option th:each="el : ${allTags}" th:value="${el.id}" th:text="${el.name}"/>
+		</select>
+        <p><input type="submit" value="Submit" /></p>
+    </form>
+</section>
+</body>
+</html>
