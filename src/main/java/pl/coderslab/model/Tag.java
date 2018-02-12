@@ -14,6 +14,8 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.NaturalId;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -38,6 +40,7 @@ public class Tag {
     private String name;
     private boolean active;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "tags")
     private Set<Post> posts = new HashSet<>();
 

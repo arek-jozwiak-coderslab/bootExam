@@ -34,12 +34,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("/moderator/**").hasRole("MODERATOR")
+        http.authorizeRequests()
+                .antMatchers("/h2-console/**").permitAll()
+                .antMatchers("/moderator/**").hasRole("MODERATOR")
+            
                 .and().formLogin().loginPage("/login").defaultSuccessUrl("/panel")
                 .and()
                 .logout().logoutSuccessUrl("/logoutpage")
                 .permitAll()
                 .and()
+                
                 .exceptionHandling().accessDeniedPage("/403");
+        /**
+         * Change settings for console h2
+         */
+        http.csrf().disable();
+        http.headers().frameOptions().sameOrigin();
     }
 }

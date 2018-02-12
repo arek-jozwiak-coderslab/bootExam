@@ -21,6 +21,8 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -49,6 +51,7 @@ public class Post {
     @NotNull
     @Lob
     private String content;
+    @JsonIgnore
     @ManyToOne
     private User user;
 
@@ -61,7 +64,7 @@ public class Post {
     @Column(name = "last_updated_at")
     private Date lastUpdatedAt = new Date();
 
-
+    @JsonIgnore
     @ManyToMany()
     @JoinTable(name = "post_tags",
             joinColumns = { @JoinColumn(name = "post_id") },
