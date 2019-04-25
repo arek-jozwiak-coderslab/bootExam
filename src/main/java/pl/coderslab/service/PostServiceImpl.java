@@ -1,12 +1,16 @@
 package pl.coderslab.service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
+import org.springframework.stereotype.Service;
+
+import pl.coderslab.exception.BaseEntityNotFoundException;
 import pl.coderslab.model.Post;
 import pl.coderslab.model.Tag;
 import pl.coderslab.repository.PostRepository;
-
+@Service
 public class PostServiceImpl implements PostService {
 
     private final PostRepository postRepository;
@@ -28,6 +32,16 @@ public class PostServiceImpl implements PostService {
     @Override
     public List<Post> findPostsByTagsIn(Set<Tag> tags) {
         return postRepository.findPostsByTagsIn(tags);
+    }
+
+    @Override
+    public List<Post> findAll() {
+        return postRepository.findAll();
+    }
+
+    @Override
+    public Post findOne(long id) {
+        return Optional.ofNullable(postRepository.findOne(id)).orElseThrow(()->new BaseEntityNotFoundException(id));
     }
 
 }
